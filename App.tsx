@@ -12,6 +12,9 @@ const App: React.FC = () => {
   // Initialize with env var if available (for dev convenience), otherwise empty
   const [apiKey, setApiKey] = useState<string>(process.env.GEMINI_API_KEY || '');
 
+  const [showKeyModal, setShowKeyModal] = useState(false);
+  const [pendingImage, setPendingImage] = useState<string | null>(null);
+
   const [state, setState] = useState<StoryState>({
     image: null,
     analysis: null,
@@ -20,11 +23,10 @@ const App: React.FC = () => {
     error: null,
   });
 
-  const handleImageSelect = async (base64: string) => {
+  const processImageRequest = async (base64: string, key: string) => {
     setState({ ...state, image: base64, loading: true, error: null, analysis: null, openingParagraph: null });
-
     try {
-      const result = await analyzeImageAndWrite(base64, apiKey);
+      const result = await analyzeImageAndWrite(base64, key);
       setState({
         image: base64,
         analysis: {
@@ -46,6 +48,24 @@ const App: React.FC = () => {
     }
   };
 
+  const handleImageSelect = async (base64: string) => {
+    if (!apiKey) {
+      setPendingImage(base64);
+      setShowKeyModal(true);
+      return;
+    }
+    await processImageRequest(base64, apiKey);
+  };
+
+  const handleKeySubmit = (key: string) => {
+    setApiKey(key);
+    setShowKeyModal(false);
+    if (pendingImage) {
+      processImageRequest(pendingImage, key);
+      setPendingImage(null);
+    }
+  };
+
   const handleReset = () => {
     setState({
       image: null,
@@ -58,7 +78,7 @@ const App: React.FC = () => {
 
   return (
     <Layout>
-      {!apiKey && <ApiKeyModal onSubmit={setApiKey} />}
+      {showKeyModal && <ApiKeyModal onSubmit={handleKeySubmit} />}
 
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         {!state.image && !state.loading ? (

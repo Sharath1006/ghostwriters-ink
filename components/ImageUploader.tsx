@@ -49,16 +49,14 @@ export const ImageUploader: React.FC<Props> = ({ onImageSelect, disabled }) => {
   };
 
   return (
-    <div
-      className="relative group cursor-pointer"
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
+    <div className="relative group cursor-pointer">
       <input
         type="file"
         accept="image/*"
         onChange={handleFileChange}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
         disabled={disabled}
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 disabled:cursor-not-allowed"
       />
