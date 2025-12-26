@@ -76,21 +76,35 @@ const App: React.FC = () => {
             <ImageUploader onImageSelect={handleImageSelect} disabled={state.loading} />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
-              <div className="text-center p-4">
-                <div className="text-amber-500 mb-2"><i className="fa-solid fa-wand-sparkles text-2xl"></i></div>
+              <button
+                className="text-center p-4 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/30 transition-all group"
+                onClick={() => alert("Visual Analysis is active by default!")}
+              >
+                <div className="text-amber-500 mb-2 group-hover:scale-110 transition-transform"><i className="fa-solid fa-wand-sparkles text-2xl"></i></div>
                 <h3 className="text-slate-200 font-semibold mb-1">Visual Analysis</h3>
                 <p className="text-slate-500 text-xs">Deep scene and mood recognition</p>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-amber-500 mb-2"><i className="fa-solid fa-pen-nib text-2xl"></i></div>
+                <div className="mt-2 text-[10px] text-amber-500 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Active</div>
+              </button>
+
+              <button
+                className="text-center p-4 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/30 transition-all group"
+                onClick={() => alert("Atmospheric Writing is active by default!")}
+              >
+                <div className="text-amber-500 mb-2 group-hover:scale-110 transition-transform"><i className="fa-solid fa-pen-nib text-2xl"></i></div>
                 <h3 className="text-slate-200 font-semibold mb-1">Atmospheric Writing</h3>
                 <p className="text-slate-500 text-xs">Professional literary openings</p>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-amber-500 mb-2"><i className="fa-solid fa-microphone-lines text-2xl"></i></div>
+                <div className="mt-2 text-[10px] text-amber-500 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Active</div>
+              </button>
+
+              <button
+                className="text-center p-4 rounded-xl border border-transparent hover:border-slate-800 hover:bg-slate-900/30 transition-all group"
+                onClick={() => alert("Vocal Narration is available after generation!")}
+              >
+                <div className="text-amber-500 mb-2 group-hover:scale-110 transition-transform"><i className="fa-solid fa-microphone-lines text-2xl"></i></div>
                 <h3 className="text-slate-200 font-semibold mb-1">Vocal Narration</h3>
                 <p className="text-slate-500 text-xs">Expressive character voices</p>
-              </div>
+                <div className="mt-2 text-[10px] text-amber-500 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Active</div>
+              </button>
             </div>
           </div>
         ) : (
