@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Ghostwriter's Ink",
+  "description": "An immersive creative writing interface that transforms your images into atmospheric story openings with AI-powered analysis and expressive narration.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
